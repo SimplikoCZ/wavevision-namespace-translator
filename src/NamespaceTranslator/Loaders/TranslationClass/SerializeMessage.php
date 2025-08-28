@@ -35,6 +35,8 @@ class SerializeMessage
 
 	private const FUNCTION_NAME = 'create';
 
+	private const PURE_FUNCTION_NAME = 'createPure';
+
 	public function serialize(Expr $expr): string
 	{
 		/** @var StaticCall $expr */
@@ -52,7 +54,7 @@ class SerializeMessage
 		}
 		/** @var Identifier $function */
 		$function = $expr->name;
-		if ($function->name !== self::FUNCTION_NAME) {
+		if ($function->name !== self::FUNCTION_NAME && $function->name !== self::PURE_FUNCTION_NAME) {
 			throw $this->serializationFailed();
 		}
 		$message = $this->message($args[0]);
@@ -66,13 +68,13 @@ class SerializeMessage
 		$regex = sprintf(
 			'({%s[a-zA-Z%s]*%s[a-zA-Z_]*})',
 			...Arrays::map(
-				[
+			[
 				SerializeClassConstFetch::C,
 				SerializeClassConstFetch::D_CLASS_PART_SEPARATOR,
 				SerializeClassConstFetch::D_SEPARATOR,
-				],
-				fn(string $c) => preg_quote($c)
-			)
+			],
+			fn(string $c) => preg_quote($c)
+		)
 		);
 		$matches = [];
 		$result = preg_match_all($regex, $serialized, $matches);
