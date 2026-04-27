@@ -4,6 +4,7 @@ namespace Wavevision\NamespaceTranslatorTests\Loaders\TranslationClass;
 
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Name;
+use PhpParser\Node\Scalar\Int_;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 use Wavevision\NamespaceTranslator\Loaders\TranslationClass\InjectSerializeClassConstFetch;
 use Wavevision\NamespaceTranslatorTests\Helpers;
@@ -33,9 +34,7 @@ class SerializeClassContFetchTest extends DIContainerTestCase
 	{
 		$this->expectException(InvalidState::class);
 		$this->expectExceptionMessage('Unsupported const format.');
-		/** @var mixed $name */
-		$name = 1;
-		$this->serializeClassConstFetch->serialize(new ClassConstFetch(new Name('name'), $name));
+		$this->serializeClassConstFetch->serialize(new ClassConstFetch(new Name('name'), new Int_(1)));
 	}
 
 	private function classConstFetch(string $string): ClassConstFetch

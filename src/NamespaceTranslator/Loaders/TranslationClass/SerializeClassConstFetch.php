@@ -55,7 +55,7 @@ class SerializeClassConstFetch
 	{
 		$class = $classConstFetch->class;
 		if ($class instanceof Name) {
-			return $class->parts;
+			return $class->getParts();
 		}
 		throw $this->unsupported();
 	}

@@ -1,0 +1,10 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - .:/app
+    user: "${UID}:${GID}"
+    environment:
+      - HOME=/tmp

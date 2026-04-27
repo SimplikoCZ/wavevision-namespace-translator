@@ -21,8 +21,9 @@ class TranslationClassTest extends TestCase
 	public function testLoadThrowsInvalidStateOnClassExistence(): void
 	{
 		$translationClass = new TranslationClass();
-		$this->expectExceptionObject(new InvalidState("Translation class 'InvalidClass' does not exist."));
-		$translationClass->load(__DIR__ . '/InvalidClass.php.txt');
+		$file = __DIR__ . '/InvalidClass.php.txt';
+		$this->expectExceptionObject(new InvalidState("Unable to get translation class from '$file'."));
+		$translationClass->load($file);
 	}
 
 	public function testLoadThrowsInvalidStateOnClassInheritance(): void

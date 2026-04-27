@@ -1,3 +1,7 @@
+UID=$(shell id -u)
+GID=$(shell id -g)
+DOCKER_RUN=UID=$(UID) GID=$(GID) docker compose run --rm php
+
 bin=vendor/bin
 chrome:=$(shell command -v google-chrome 2>/dev/null)
 codeSnifferRuleset=codesniffer-ruleset.xml
@@ -14,45 +18,51 @@ all:
 
 # Setup
 
+docker-build:
+	UID=$(UID) GID=$(GID) docker compose build
+
 composer:
-	composer install
+	$(DOCKER_RUN) composer install
+
+composer-update:
+	$(DOCKER_RUN) composer update
 
 reset:
 	rm -rf $(temp)/cache
-	composer dumpautoload
+	$(DOCKER_RUN) composer dumpautoload
 
 di: reset
-	bin/extract-services
+	$(DOCKER_RUN) bin/extract-services
 
 fix: reset check-syntax phpcbf phpcs phpstan test
 
 # QA
 
 check-syntax:
-	$(bin)/parallel-lint -e $(php) $(dirs)
+	$(DOCKER_RUN) $(bin)/parallel-lint -e $(php) $(dirs)
 
 phpcs:
-	$(bin)/phpcs -sp --standard=$(codeSnifferRuleset) --extensions=php $(dirs)
+	$(DOCKER_RUN) $(bin)/phpcs -sp --standard=$(codeSnifferRuleset) --extensions=php $(dirs)
 
 phpcbf:
-	$(bin)/phpcbf -spn --standard=$(codeSnifferRuleset) --extensions=php $(dirs) ; true
+	$(DOCKER_RUN) $(bin)/phpcbf -spn --standard=$(codeSnifferRuleset) --extensions=php $(dirs) ; true
 
 phpstan:
-	$(bin)/phpstan analyze $(dirs) --level max
+	$(DOCKER_RUN) $(bin)/phpstan analyze $(dirs) --level max
 
 # Tests
 
 test:
-	$(bin)/phpunit
+	$(DOCKER_RUN) $(bin)/phpunit
 
 test-coverage: reset
-	$(bin)/phpunit --coverage-html=$(coverage)
+	$(DOCKER_RUN) $(bin)/phpunit --coverage-html=$(coverage)
 
 test-coverage-clover: reset
-	$(bin)/phpunit --coverage-clover=$(coverageClover)
+	$(DOCKER_RUN) $(bin)/phpunit --coverage-clover=$(coverageClover)
 
 test-coverage-report: test-coverage-clover
-	$(bin)/php-coveralls --coverage_clover=$(coverageClover) --verbose
+	$(DOCKER_RUN) $(bin)/php-coveralls --coverage_clover=$(coverageClover) --verbose
 
 test-coverage-open: test-coverage
 ifndef chrome

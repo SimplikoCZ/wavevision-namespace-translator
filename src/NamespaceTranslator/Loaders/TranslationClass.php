@@ -3,6 +3,10 @@
 namespace Wavevision\NamespaceTranslator\Loaders;
 
 use Nette\SmartObject;
+use PhpParser\Node;
+use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\Namespace_;
+use PhpParser\ParserFactory;
 use ReflectionClass;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 use Wavevision\NamespaceTranslator\Exceptions\MissingResource;
@@ -14,15 +18,13 @@ use Wavevision\NamespaceTranslator\Resources\Translation;
 use Wavevision\NamespaceTranslator\Transfer\InjectLocales;
 use Wavevision\Utils\Arrays;
 use Wavevision\Utils\Strings;
-use Wavevision\Utils\Tokenizer\Tokenizer;
-use Wavevision\Utils\Tokenizer\TokenizeResult;
 use function class_exists;
 use function class_implements;
+use function file_get_contents;
 use function in_array;
 use function is_file;
 use function sprintf;
 use function ucfirst;
-use const T_CLASS;
 
 class TranslationClass implements Loader
 {
@@ -34,13 +36,6 @@ class TranslationClass implements Loader
 	use SmartObject;
 
 	public const FORMAT = 'php';
-
-	private Tokenizer $tokenizer;
-
-	public function __construct()
-	{
-		$this->tokenizer = new Tokenizer();
-	}
 
 	/**
 	 * @return array<mixed>
@@ -96,22 +91,18 @@ class TranslationClass implements Loader
 		return 'php';
 	}
 
-	private function tokenizerResult(string $resource): TokenizeResult
+	private function getClass(string $resource): string
 	{
 		if (!is_file($resource)) {
 			throw new MissingResource("Unable to read file '$resource'.");
 		}
-		$result = $this->tokenizer->getStructureNameFromFile($resource, [T_CLASS]);
-		if ($result === null) {
+		$class = $this->findClassInFile($resource);
+		if ($class === null) {
 			throw new InvalidState("Unable to get translation class from '$resource'.");
 		}
-		return $result;
-	}
-
-	private function getClass(string $resource): string
-	{
-		$result = $this->tokenizerResult($resource);
-		$class = $result->getFullyQualifiedName();
+		if (!class_exists($class)) {
+			require_once $resource;
+		}
 		if (!class_exists($class)) {
 			throw new InvalidState("Translation class '$class' does not exist.");
 		}
@@ -123,6 +114,40 @@ class TranslationClass implements Loader
 			throw new SkipResource();
 		}
 		return $class;
+	}
+
+	private function findClassInFile(string $file): ?string
+	{
+		$parser = (new ParserFactory())->createForNewestSupportedVersion();
+		try {
+			$stmts = $parser->parse(file_get_contents($file));
+		} catch (\Throwable $e) {
+			return null;
+		}
+		if ($stmts === null) {
+			return null;
+		}
+		return $this->findClassInNodes($stmts);
+	}
+
+	/**
+	 * @param Node[] $nodes
+	 */
+	private function findClassInNodes(array $nodes, ?string $namespace = null): ?string
+	{
+		foreach ($nodes as $node) {
+			if ($node instanceof Namespace_) {
+				return $this->findClassInNodes($node->stmts, $node->name ? $node->name->toString() : null);
+			}
+			if ($node instanceof Class_) {
+				if ($node->name === null) {
+					continue;
+				}
+				$name = $node->name->toString();
+				return $namespace ? $namespace . '\\' . $name : $name;
+			}
+		}
+		return null;
 	}
 
 }

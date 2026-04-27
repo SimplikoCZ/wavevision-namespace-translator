@@ -7,8 +7,6 @@ use Contributte\Translation\Wrappers\NotTranslate;
 use Nette\Localization\ITranslator;
 use Nette\SmartObject;
 use function is_array;
-use function is_int;
-use function is_string;
 
 class PrefixedTranslator implements ITranslator
 {
@@ -32,13 +30,11 @@ class PrefixedTranslator implements ITranslator
 	public function translate($message, ...$parameters): string
 	{
 		if ($message instanceof Message) {
-			$message->setMessage(Helpers::key([$this->prefix, $message->getMessage()]));
+			$message = clone $message;
+			$message->message = Helpers::key([$this->prefix, $message->message]);
 		}
 		if (is_array($message)) {
 			$message = [$this->prefix, ...$message];
-		}
-		if (is_int($message) || is_string($message)) {
-			$message = Helpers::key([$this->prefix, $message]);
 		}
 		return $this->translator->translate($message, ...$parameters);
 	}

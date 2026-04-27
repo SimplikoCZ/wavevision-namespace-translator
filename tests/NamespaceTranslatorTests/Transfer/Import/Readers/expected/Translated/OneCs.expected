@@ -9,8 +9,8 @@ class OneCs extends Translation
     /**
      * @inheritDoc
      */
-    public static function define() : array
+    public static function define(): array
     {
-        return array(self::HELLO => Message::create('Ahoj %s!', self::NAME));
+        return [self::HELLO => Message::create('Ahoj %s!', self::NAME)];
     }
 }

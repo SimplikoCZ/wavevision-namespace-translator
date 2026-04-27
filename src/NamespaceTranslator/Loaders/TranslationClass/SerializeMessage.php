@@ -49,7 +49,7 @@ class SerializeMessage
 		}
 		/** @var Name $class */
 		$class = $expr->class;
-		if ($class->parts[0] !== self::CLASS_NAME) {
+		if ($class->getFirst() !== self::CLASS_NAME) {
 			throw $this->serializationFailed();
 		}
 		/** @var Identifier $function */

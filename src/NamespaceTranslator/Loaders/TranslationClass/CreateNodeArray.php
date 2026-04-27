@@ -5,8 +5,8 @@ namespace Wavevision\NamespaceTranslator\Loaders\TranslationClass;
 use Nette\SmartObject;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
-use PhpParser\Node\Expr\ArrayItem;
-use PhpParser\Node\Scalar\LNumber;
+use PhpParser\Node\ArrayItem;
+use PhpParser\Node\Scalar\Int_;
 use PhpParser\Node\Scalar\String_;
 use Wavevision\DIServiceAnnotation\DIService;
 use function is_array;
@@ -39,7 +39,7 @@ class CreateNodeArray
 		$items = [];
 		foreach ($content as $key => $value) {
 			$items[] = new ArrayItem(
-				is_array($value) ? $this->createArray($this->items($content[$key])) : $this->value($value),
+				is_array($value) ? $this->createArray($this->items($value)) : $this->value($value),
 				$this->key($key)
 			);
 		}
@@ -52,7 +52,7 @@ class CreateNodeArray
 	private function key($key): Expr
 	{
 		if (is_int($key)) {
-			return new LNumber($key);
+			return new Int_($key);
 		}
 		if ($this->serializeClassConstFetch->isSerialized($key)) {
 			return $this->serializeClassConstFetch->deserialize($key);
@@ -74,7 +74,7 @@ class CreateNodeArray
 	 */
 	private function createArray(array $items): Array_
 	{
-		return new Array_($items, ['shortArraySyntax' => Array_::KIND_SHORT]);
+		return new Array_($items, ['kind' => Array_::KIND_SHORT]);
 	}
 
 }

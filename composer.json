@@ -28,26 +28,47 @@
     }
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "require": {
-    "php": ">=7.4",
-    "contributte/console": "^0.9",
-    "contributte/translation": "^0.8",
-    "google/apiclient": "^2.7",
-    "nette/application": "^3.1",
-    "nette/di": "^3.0",
-    "nette/neon": "^3.0",
-    "nikic/php-parser": "^4.9",
-    "wavevision/di-service-annotation": "^4.0",
-    "wavevision/utils": "^2.1"
+    "php": "^8.4",
+    "contributte/console": "^0.10",
+    "contributte/translation": "^2.0",
+    "google/apiclient": "^2.15",
+    "nette/application": "^3.2",
+    "nette/di": "^3.1",
+    "nette/neon": "^3.4",
+    "nikic/php-parser": "^5.0",
+    "wavevision/di-service-annotation": "^5.0",
+    "wavevision/utils": "^3.0"
   },
   "require-dev": {
     "mikey179/vfsstream": "^1.6",
-    "php-coveralls/php-coveralls": "^2.2",
-    "wavevision/coding-standard": "^6.0",
-    "wavevision/nette-tests": "3.1.3"
+    "php-coveralls/php-coveralls": "^2.7",
+    "wavevision/coding-standard": "^7.1",
+    "wavevision/nette-tests": "4.0"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/SimplikoCZ/wavevision-coding-standard.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/SimplikoCZ/wavevision-nette-tests.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/SimplikoCZ/wavevision-utils.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/SimplikoCZ/wavevision-di-service-annotation"
+    }
+  ],
   "extra": {
     "phpstan": {}
   }

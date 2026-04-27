@@ -5,7 +5,7 @@ namespace Wavevision\NamespaceTranslator\Loaders\TranslationClass;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
-use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 use PhpParser\NodeVisitorAbstract;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 use function count;
@@ -16,7 +16,7 @@ class ReturnFinder extends NodeVisitorAbstract
 	private Return_ $return;
 
 	/**
-	 * @return mixed
+	 * @return null|int|Node|Node[]
 	 */
 	public function leaveNode(Node $node)
 	{
@@ -28,15 +28,16 @@ class ReturnFinder extends NodeVisitorAbstract
 				throw new InvalidState('Define function must be public and static.');
 			}
 			$stmts = $node->getStmts();
-			if (isset($stmts[0]) && count($stmts) === 1) {
+			if ($stmts !== null && isset($stmts[0]) && count($stmts) === 1) {
 				/** @var Return_ $return */
 				$return = $stmts[0];
 				$this->return = $return;
 			} else {
 				throw new InvalidState('Define function must have exactly one statement.');
 			}
-			return NodeTraverser::STOP_TRAVERSAL;
+			return NodeVisitor::STOP_TRAVERSAL;
 		}
+		return null;
 	}
 
 	public function getReturn(): Return_

@@ -8,8 +8,8 @@ class PrefixedEn extends Translation
     /**
      * @return array<mixed>
      */
-    public static function define() : array
+    public static function define(): array
     {
-        return array('test' => 'eng123');
+        return ['test' => 'eng123'];
     }
 }

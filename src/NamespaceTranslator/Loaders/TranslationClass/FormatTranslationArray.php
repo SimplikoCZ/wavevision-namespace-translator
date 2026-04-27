@@ -4,9 +4,9 @@ namespace Wavevision\NamespaceTranslator\Loaders\TranslationClass;
 
 use Nette\SmartObject;
 use PhpParser\Node\Expr\Array_;
-use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Expr\ClassConstFetch;
-use PhpParser\Node\Scalar\LNumber;
+use PhpParser\Node\Scalar\Int_;
 use PhpParser\Node\Scalar\String_;
 use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
@@ -29,6 +29,9 @@ class FormatTranslationArray
 		$output = [];
 		/** @var ArrayItem $item */
 		foreach ($array->items as $item) {
+			if ($item === null) {
+				continue;
+			}
 			$output[$this->key($item)] = $this->value($item);
 		}
 		return $output;
@@ -55,7 +58,7 @@ class FormatTranslationArray
 	private function key(ArrayItem $item)
 	{
 		$key = $item->key;
-		if ($key instanceof LNumber) {
+		if ($key instanceof Int_) {
 			return $key->value;
 		}
 		if ($key instanceof String_) {

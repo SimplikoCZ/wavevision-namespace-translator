@@ -9,9 +9,9 @@ trait TranslatedComponent
 
 	use NamespaceTranslator;
 
-	protected function createTemplate(): Template
+	protected function createTemplate(?string $class = null): Template
 	{
-		return $this->setTemplateTranslator(parent::createTemplate());
+		return $this->setTemplateTranslator(parent::createTemplate($class));
 	}
 
 }

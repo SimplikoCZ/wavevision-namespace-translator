@@ -8,8 +8,8 @@ class PrefixedCs extends Translation
     /**
      * @return array<mixed>
      */
-    public static function define() : array
+    public static function define(): array
     {
-        return array('test' => '123', 'one' => array('two' => array('nested' => 'nested'), 'one' => 'asd'), self::BOOK => 'The Tale of Scrotie McBoogerballs');
+        return ['test' => '123', 'one' => ['two' => ['nested' => 'nested'], 'one' => 'asd'], self::BOOK => 'The Tale of Scrotie McBoogerballs'];
     }
 }

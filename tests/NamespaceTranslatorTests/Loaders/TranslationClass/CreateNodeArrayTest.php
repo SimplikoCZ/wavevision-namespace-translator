@@ -17,7 +17,7 @@ class CreateNodeArrayTest extends DIContainerTestCase
 	{
 		$printer = new Standard();
 		$ast = $this->createNodeArray->process(['a' => 'b', 'c:self-TEST' => ['a' => 'a']]);
-		$this->assertEquals("array('a' => 'b', self::TEST => array('a' => 'a'))", $printer->prettyPrint([$ast]));
+		$this->assertEquals("['a' => 'b', self::TEST => ['a' => 'a']]", $printer->prettyPrint([$ast]));
 	}
 
 }

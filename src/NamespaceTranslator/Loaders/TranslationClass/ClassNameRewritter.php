@@ -21,13 +21,14 @@ class ClassNameRewritter extends NodeVisitorAbstract
 	}
 
 	/**
-	 * @return mixed
+	 * @return null|int|Node|Node[]
 	 */
 	public function enterNode(Node $node)
 	{
 		if ($node instanceof Class_) {
 			$node->name = new Identifier($this->newClassName);
 		}
+		return null;
 	}
 
 }

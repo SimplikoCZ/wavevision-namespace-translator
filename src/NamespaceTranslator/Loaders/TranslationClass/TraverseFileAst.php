@@ -23,7 +23,7 @@ class TraverseFileAst
 	 */
 	public function process(string $file, NodeVisitorAbstract ...$visitors): array
 	{
-		$parser = (new ParserFactory())->create(ParserFactory::ONLY_PHP7);
+		$parser = (new ParserFactory())->createForNewestSupportedVersion();
 		/** @var Node\Stmt[] $parsedFile */
 		$parsedFile = $parser->parse(FileSystem::read($file));
 		$traverser = new NodeTraverser();

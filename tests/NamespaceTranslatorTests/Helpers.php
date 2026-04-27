@@ -25,7 +25,7 @@ class Helpers
 
 	public static function stringToExpr(string $string): Expr
 	{
-		$ast = (new ParserFactory())->create(ParserFactory::ONLY_PHP7)->parse(
+		$ast = (new ParserFactory())->createForNewestSupportedVersion()->parse(
 			"<?php $string;"
 		);
 		if (isset($ast[0])) {

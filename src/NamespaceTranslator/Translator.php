@@ -28,8 +28,8 @@ class Translator implements ITranslator
 			return $message->message;
 		}
 		if ($message instanceof Message) {
-			$parameters = $message->getParameters();
-			$message = $message->getMessage();
+			$parameters = $message->parameters;
+			$message = $message->message;
 		}
 		if (is_array($message)) {
 			$message = Helpers::key($message);
