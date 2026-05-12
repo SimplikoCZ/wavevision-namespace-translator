@@ -16,9 +16,7 @@ use function str_replace;
 use function strlen;
 use function substr_replace;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class FileSetFactory
 {
 

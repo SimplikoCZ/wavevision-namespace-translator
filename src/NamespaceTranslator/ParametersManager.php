@@ -5,9 +5,7 @@ namespace Wavevision\NamespaceTranslator;
 use Nette\SmartObject;
 use Wavevision\DIServiceAnnotation\DIService;
 
-/**
- * @DIService(generateInject=true, name="parametersManager", params={"%dirNames%"})
- */
+#[DIService(generateInject: true, name: 'parametersManager', params: ['%dirNames%'])]
 class ParametersManager
 {
 

@@ -7,9 +7,7 @@ use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\NamespaceTranslator\Transfer\Import\InjectSaveLines;
 use Wavevision\NamespaceTranslator\Transfer\Storages\Csv\InjectCsvReader;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class Csv
 {
 

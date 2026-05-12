@@ -7,9 +7,7 @@ use PhpParser\Node\Expr\Array_;
 use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class GetTranslationArray
 {
 

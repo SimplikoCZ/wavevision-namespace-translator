@@ -6,9 +6,7 @@ use Nette\SmartObject;
 use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\NamespaceTranslator\Loaders\InjectManager;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class ExtractTranslations
 {
 

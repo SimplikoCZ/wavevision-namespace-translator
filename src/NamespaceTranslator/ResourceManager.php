@@ -20,9 +20,7 @@ use function class_exists;
 use function dirname;
 use function in_array;
 
-/**
- * @DIService(name="resourceManager", generateInject=true)
- */
+#[DIService(name: 'resourceManager', generateInject: true)]
 class ResourceManager
 {
 

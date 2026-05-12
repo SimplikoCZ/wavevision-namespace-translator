@@ -5,9 +5,7 @@ namespace Wavevision\NamespaceTranslator\Transfer\Import;
 use Nette\SmartObject;
 use Wavevision\DIServiceAnnotation\DIService;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class SaveLines
 {
 

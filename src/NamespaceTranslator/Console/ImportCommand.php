@@ -10,8 +10,8 @@ use Wavevision\NamespaceTranslator\Transfer\Import\InjectImporter;
 
 /**
  * @codeCoverageIgnore
- * @DIService
  */
+#[DIService]
 class ImportCommand extends Command
 {
 

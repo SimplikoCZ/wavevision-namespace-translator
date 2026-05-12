@@ -8,9 +8,7 @@ use Wavevision\NamespaceTranslator\Transfer\Import\InjectSaveLines;
 use Wavevision\NamespaceTranslator\Transfer\Storages\Google\Config;
 use Wavevision\NamespaceTranslator\Transfer\Storages\Google\InjectGoogleSheetReader;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class GoogleSheet
 {
 

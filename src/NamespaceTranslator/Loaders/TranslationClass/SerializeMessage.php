@@ -22,9 +22,7 @@ use function sprintf;
 use function str_replace;
 use function trim;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class SerializeMessage
 {
 

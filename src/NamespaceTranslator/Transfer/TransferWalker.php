@@ -8,9 +8,7 @@ use Wavevision\NamespaceTranslator\DI\Extension;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 use Wavevision\NamespaceTranslator\Transfer\Storages\Google\Config;
 
-/**
- * @DIService(generateInject=true, params={"%transfer%"})
- */
+#[DIService(generateInject: true, params: ['%transfer%'])]
 class TransferWalker
 {
 

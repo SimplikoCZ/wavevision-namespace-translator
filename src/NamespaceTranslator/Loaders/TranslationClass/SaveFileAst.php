@@ -8,9 +8,7 @@ use PhpParser\Node;
 use PhpParser\PrettyPrinter\Standard;
 use Wavevision\DIServiceAnnotation\DIService;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class SaveFileAst
 {
 

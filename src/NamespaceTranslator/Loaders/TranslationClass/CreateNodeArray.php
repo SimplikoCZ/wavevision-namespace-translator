@@ -12,9 +12,7 @@ use Wavevision\DIServiceAnnotation\DIService;
 use function is_array;
 use function is_int;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class CreateNodeArray
 {
 

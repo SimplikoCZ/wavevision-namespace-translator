@@ -8,9 +8,7 @@ use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 use Wavevision\NamespaceTranslator\InjectTranslator;
 use Wavevision\Utils\Arrays;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class Locales
 {
 

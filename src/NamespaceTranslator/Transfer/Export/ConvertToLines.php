@@ -9,9 +9,7 @@ use Wavevision\NamespaceTranslator\Transfer\InjectLocales;
 use function array_search;
 use function is_int;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class ConvertToLines
 {
 

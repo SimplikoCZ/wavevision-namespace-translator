@@ -10,8 +10,8 @@ use Wavevision\NamespaceTranslator\Transfer\Export\InjectExporter;
 
 /**
  * @codeCoverageIgnore
- * @DIService
  */
+#[DIService]
 class ExportCommand extends Command
 {
 

@@ -17,9 +17,7 @@ use function is_file;
 use function trim;
 use function unlink;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class SaveFileSet
 {
 

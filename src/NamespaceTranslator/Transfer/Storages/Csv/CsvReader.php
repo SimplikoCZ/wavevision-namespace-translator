@@ -6,9 +6,7 @@ use Nette\SmartObject;
 use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\Utils\File;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class CsvReader
 {
 

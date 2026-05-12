@@ -6,9 +6,7 @@ use Nette\SmartObject;
 use Wavevision\DIServiceAnnotation\DIService;
 use function chr;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class RangeFactory
 {
 

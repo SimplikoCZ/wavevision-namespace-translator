@@ -11,9 +11,7 @@ use PhpParser\Node\Scalar\String_;
 use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\NamespaceTranslator\Exceptions\InvalidState;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class FormatTranslationArray
 {
 

@@ -14,9 +14,7 @@ use function strlen;
 use function strpos;
 use function substr;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class SerializeClassConstFetch
 {
 

@@ -13,9 +13,7 @@ use function file_get_contents;
 use function filter_var;
 use const FILTER_VALIDATE_INT;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class Helpers
 {
 

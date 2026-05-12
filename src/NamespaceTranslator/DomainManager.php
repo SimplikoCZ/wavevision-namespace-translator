@@ -12,9 +12,7 @@ use function implode;
 use function lcfirst;
 use function ucfirst;
 
-/**
- * @DIService(name="domainManager", generateInject=true)
- */
+#[DIService(name: 'domainManager', generateInject: true)]
 class DomainManager
 {
 

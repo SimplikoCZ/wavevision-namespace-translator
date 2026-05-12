@@ -13,8 +13,8 @@ use function count;
 
 /**
  * @codeCoverageIgnore
- * @DIService(generateInject=true)
  */
+#[DIService(generateInject: true)]
 class GoogleSheetWritter
 {
 

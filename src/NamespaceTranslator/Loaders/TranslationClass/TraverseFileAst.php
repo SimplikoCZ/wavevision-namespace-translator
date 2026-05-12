@@ -10,9 +10,7 @@ use PhpParser\NodeVisitorAbstract;
 use PhpParser\ParserFactory;
 use Wavevision\DIServiceAnnotation\DIService;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class TraverseFileAst
 {
 

@@ -7,9 +7,7 @@ use SplFileInfo;
 use Wavevision\DIServiceAnnotation\DIService;
 use Wavevision\NamespaceTranslator\Exceptions\SkipResource;
 
-/**
- * @DIService(name="translatorFactory")
- */
+#[DIService(name: 'translatorFactory')]
 class TranslatorFactory
 {
 

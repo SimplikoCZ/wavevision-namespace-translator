@@ -14,9 +14,7 @@ use function array_shift;
 use function implode;
 use function sprintf;
 
-/**
- * @DIService(generateInject=true)
- */
+#[DIService(generateInject: true)]
 class ConvertFromLines
 {
 

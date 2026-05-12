@@ -13,9 +13,7 @@ use Wavevision\NamespaceTranslator\Resources\Messages;
 use function basename;
 use function pathinfo;
 
-/**
- * @DIService(name="resourceLoader", generateInject=true)
- */
+#[DIService(name: 'resourceLoader', generateInject: true)]
 class ResourceLoader
 {
 
